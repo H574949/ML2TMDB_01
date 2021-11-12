@@ -11,7 +11,7 @@ class StreamlitApp:
     
     def __init__(self):
         ppath = Path(__file__).parents[1] / 'ml2tmdb_01/revenue_pred'
-        self.model = load_model('revenue_pred') 
+        self.model = load_model(ppath) 
         self.save_fn = 'path.csv'
 
     def predict(self, input_data):
@@ -28,7 +28,7 @@ class StreamlitApp:
     
     def run(self):
         ipath = Path(__file__).parents[1] / 'ml2tmdb_01/image.png'
-        image = Image.open('image.png')
+        image = Image.open(ipath)
         st.image(image, use_column_width=False)
 
         
@@ -49,7 +49,7 @@ class StreamlitApp:
                 BTC = 1
             
             
-            print(genre)
+            
             output =''
             
 
@@ -60,7 +60,7 @@ class StreamlitApp:
                 output = self.predict(input_df)
                 self.store_prediction(output)
                 output = (output['Label'][0])/1000000  
-                st.success('Predicted revenue: {revenue:,.2f}$ million'.format(revenue = output).replace(",", " "))
+                st.success('Predicted revenue: {rev:,.2f}$ million'.format(rev = output).replace(",", " "))
 
 
 sa = StreamlitApp()
