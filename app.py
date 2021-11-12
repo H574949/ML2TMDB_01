@@ -10,7 +10,7 @@ import os
 class StreamlitApp:
     
     def __init__(self):
-        ppath = Path(__file__).parents[0] / 'ml2tmdb_01/revenue_pred'
+        ppath = Path(__file__).parents[1] / '/ml2tmdb_02/revenue_pred'
         self.model = load_model(ppath) # app/revenue_pred.pkl
         self.save_fn = 'path.csv'
 
