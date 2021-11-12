@@ -1,9 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[2]:
-
-
 from pycaret.classification import load_model, predict_model
 import pandas as pd
 import numpy as np
@@ -13,14 +7,11 @@ from PIL import Image
 import os
 
 
-# In[ ]:
-
-
 class StreamlitApp:
     
     def __init__(self):
         ppath = Path(__file__).parents[1] / 'revenue_pred'
-        self.model = load_model(ppath)
+        self.model = load_model(ppath) # app/revenue_pred.pkl
         self.save_fn = 'path.csv'
 
     def predict(self, input_data):
@@ -36,6 +27,7 @@ class StreamlitApp:
             output_df.to_csv(self.save_fn, index=False)
     
     def run(self):
+        ipath = Path(__file__).parents[1] / 'image.png'
         image = Image.open('./image.png')
         st.image(image, use_column_width=False)
 
@@ -48,7 +40,7 @@ class StreamlitApp:
             budget = st.number_input('Budget', min_value=10000, max_value=10000000, value=10000)
             popularity = st.number_input('TMBD Popularity Rating (0-100)', min_value=0, max_value=100, value=0)
             runtime = st.number_input('Runtime', min_value=1, max_value=600, value=1)
-            genre = st.selectbox('Genre', ['Comedy','Action','Thriller','Drama'])
+            genre = st.selectbox('Select genres:', ['Action', 'Comedy', 'Romance', 'Sci-fi', 'Drama', 'Fantasy', 'Horror', 'Mystery', 'Thriller', 'Western', 'Adventure', 'Documentary'])
             BTC = 0
             production_companies = st.text_input("Production company")
             original_language = st.selectbox('Original Language', ['en', 'hi','ko','sr','fr','it','nl','zh','es','cs','ta','cn','ru','tr','ja','fa','sv','de','te','pt','mr'])
@@ -56,7 +48,7 @@ class StreamlitApp:
             if st.checkbox('Belongs to collection'):
                 BTC = 1
 
-
+         
 
             output =''
             input_dict = {'budget':budget, 'popularity':popularity, 'runtime':runtime, 'genres':genre, 'production_companies':production_companies,
