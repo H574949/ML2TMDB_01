@@ -48,7 +48,7 @@ class StreamlitApp:
             if st.checkbox('Belongs to collection'):
                 BTC = 1
 
-         
+     
 
             output =''
             input_dict = {'budget':budget, 'popularity':popularity, 'runtime':runtime, 'genres':genre, 'production_companies':production_companies,
@@ -58,10 +58,8 @@ class StreamlitApp:
             if st.button('Predict'):
                 output = self.predict(input_df)
                 self.store_prediction(output)
-                output = (output['Label'][0])
-                #'test' if output['Label'][0] == 1 else 'not'
-                
-            st.success('Predicted Revenue: {}'.format(output))
+                output = (output['Label'][0])/1000000  
+                st.success('Predicted revenue: {revenue:,.2f}$ million'.format(revenue = output).replace(",", " "))
 
 
 sa = StreamlitApp()
