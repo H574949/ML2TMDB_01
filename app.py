@@ -8,6 +8,7 @@ from pycaret.classification import load_model, predict_model
 import pandas as pd
 import numpy as np
 import streamlit as st
+from pathlib import Path
 from PIL import Image
 import os
 
@@ -18,7 +19,8 @@ import os
 class StreamlitApp:
     
     def __init__(self):
-        self.model = load_model('revenue_pred')
+        ppath = Path(__file__).parents[1] / 'revenue_pred'
+        self.model = load_model(ppath)
         self.save_fn = 'path.csv'
 
     def predict(self, input_data):
