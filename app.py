@@ -10,7 +10,7 @@ import os
 class StreamlitApp:
     
     def __init__(self):
-        ppath = Path(__file__).parents[1] / 'revenue_pred'
+        ppath = Path(__file__).parents[1] / 'ml2tmdb_01/revenue_pred'
         self.model = load_model(ppath) 
         self.save_fn = 'path.csv'
 
@@ -27,7 +27,7 @@ class StreamlitApp:
             output_df.to_csv(self.save_fn, index=False)
     
     def run(self):
-        ipath = Path(__file__).parents[1] / 'image.png'
+        ipath = Path(__file__).parents[1] / 'ml2tmdb_01/image.png'
         image = Image.open(ipath)
         st.image(image, use_column_width=False)
 
